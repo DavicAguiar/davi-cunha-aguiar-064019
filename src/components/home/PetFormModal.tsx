@@ -53,7 +53,7 @@ export const PetFormModal: React.FC<PetFormModalProps> = ({ isOpen, onClose, pet
     if (!form.raca?.trim()) errs.raca = "Raça é obrigatória";
     
     if (!form.idade) errs.idade = "Informe a idade";
-    if (!previewUrl) errs.foto = "A imagem do pet é obrigatória";
+    // if (!previewUrl) errs.foto = "A imagem do pet é obrigatória";
     
     setErrors(errs);
     return Object.keys(errs).length === 0;

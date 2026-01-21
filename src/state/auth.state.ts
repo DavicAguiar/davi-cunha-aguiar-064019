@@ -1,11 +1,13 @@
 import { BehaviorSubject } from 'rxjs';
-import type { AuthState } from '../models/auth.model';
+import type { AuthState, AuthView } from '../models/auth.model';
+
+const savedView = localStorage.getItem('mfa_pending') === 'true' ? 'MFA' : 'LOGIN';
 
 const initialState: AuthState = {
   user: null,
   token: localStorage.getItem('token'),
   isAuthenticated: !!localStorage.getItem('token'),
-  currentView: 'LOGIN',
+  currentView: savedView as AuthView,
   loading: false,    
   error: null
 };
@@ -17,20 +19,31 @@ export const authStateActions = {
     const current = authState$.getValue();
     authState$.next({ ...current, ...update });
   },
-  
-  setLogin: (user: any, token: string) => {
+
+  setLogin: (user: any, token: string, refreshToken?: string) => {
     localStorage.setItem('token', token);
+    if (refreshToken) localStorage.setItem('refresh_token', refreshToken);
+    
     authStateActions.updateState({
       user,
       token,
       isAuthenticated: true,
       loading: false,
-      error: null
+      error: null,
+      currentView: 'LOGIN'
     });
   },
 
   logout: () => {
     localStorage.removeItem('token');
-    authState$.next({ ...initialState, token: null, isAuthenticated: false });
+    localStorage.removeItem('refresh_token');
+    authState$.next({ 
+      user: null, 
+      token: null, 
+      isAuthenticated: false, 
+      currentView: 'LOGIN', 
+      loading: false, 
+      error: null 
+    });
   }
 };

@@ -1,5 +1,6 @@
-import type { AuthView } from '../models/auth.model';
+import type { AuthView, User } from '../models/auth.model';
 import { authState$, authStateActions } from '../state/auth.state';
+import { authService } from '../services/auth.service';
 import { map } from 'rxjs/operators';
 
 let refreshTimer: ReturnType<typeof setInterval> | null = null;
@@ -13,34 +14,40 @@ export const authFacade = {
     authState$.next({ ...current, currentView: view, error: null });
   },
 
-  async login(credentials: any) {
+ async login(credentials: any) {
     const current = authState$.getValue();
-    
     authState$.next({ ...current, loading: true, error: null });
-    console.log(credentials);
     
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await authService.login(credentials);
       
-      const mockUser = { id: '1', nome: 'Davi Aguiar', email: 'davi@exemplo.com' };
-      const mockToken = 'seu-jwt-token';
+      const user: User = { 
+        username: credentials.username, 
+        perfil: credentials.username === 'admin' ? 'ADMIN' : 'USUARIO' 
+      };
       
-      authStateActions.setLogin(mockUser, mockToken);
+      authStateActions.setLogin(user, response.access_token, response.refresh_token);
+      
+      this.startRefreshTimer();
     } catch (err) {
-      authState$.next({ ...current, loading: false, error: 'Falha na autenticação.' });
+      authState$.next({ ...current, loading: false, error: 'Usuário ou senha incorretos.' });
     }
   },
 
   async refreshToken() {
-    console.log('Renovando token automaticamente...');
+    const refreshToken = localStorage.getItem('refresh_token');
+
+    if (!refreshToken) return this.logout();
+
     try {
-      const newToken = 'novo-token-' + Date.now();
-      const currentUser = authState$.getValue().user;
+      const response = await authService.refreshToken(refreshToken); 
       
-      if (currentUser) {
-        authStateActions.setLogin(currentUser, newToken);
+      const currentState = authState$.getValue();
+      if (currentState.user) {
+        authStateActions.setLogin(currentState.user, response.access_token, response.refresh_token);
       }
     } catch (err) {
+      console.error('Falha ao renovar token:', err);
       this.logout();
     }
   },

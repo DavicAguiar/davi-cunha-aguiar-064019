@@ -1,23 +1,46 @@
-import  { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import  { Suspense, lazy, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
+import { authFacade } from './facades/auth.facade';
+import { Header } from './components/global/Header';
+import { Footer } from './components/global/Footer';
+import { Toast } from './components/global/Toast';
 
 const LoginPage = lazy(() => import('./pages/auth/LoginPage').then(m => ({ default: m.LoginPage })));
-// Descomente conforme criar os arquivos:
-// const DashboardPage = lazy(() => import('./pages/dashboard/DashboardPage'));
-// const PetsPage = lazy(() => import('./pages/pets/PetsPage')); 
+const HomePage = lazy(() => import('./pages/home/HomePage').then(m => ({ default: m.HomePage })));
+
+const AppLayout = () => (
+  <div className="min-h-screen flex flex-col bg-slate-50">
+    <Header />
+    <main className="flex-grow">
+      <Outlet /> 
+    </main>
+    <Footer />
+  </div>
+);
 
 function App() {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      authFacade.startRefreshTimer();
+    }
+  }, []);
+
   return (
     <BrowserRouter>
-      <Suspense fallback={<LoadingFallback />}>
+    <Toast />
+    
+      <Suspense fallback={ <LoadingFallback /> }>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={ <LoginPage /> } />
 
+         {/* Rotas Privadas */}
           <Route element={<ProtectedRoute />}>
-            {/* <Route path="/dashboard" element={<DashboardPage />} /> */}
-            {/* <Route path="/pets" element={<PetsPage />} /> */}
-            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route element={<AppLayout />}>
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/" element={<Navigate to="/home" replace />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<Navigate to="/login" replace />} />
@@ -32,7 +55,7 @@ const LoadingFallback = () => (
     <div className="flex flex-col items-center">
       <div className="w-16 h-16 border-4 border-emerald-200 border-t-emerald-600 rounded-full animate-spin"></div>
       <p className="mt-4 text-emerald-800 font-black animate-pulse uppercase tracking-widest text-xs">
-        Pet Manager SEPLAG
+        Pet SEPLAG
       </p>
     </div>
   </div>

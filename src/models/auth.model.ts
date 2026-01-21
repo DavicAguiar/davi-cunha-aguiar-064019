@@ -1,11 +1,9 @@
 export interface User {
-  id: string;
-  nome: string;
-  email: string;
+  username: string;
   perfil: 'ADMIN' | 'USUARIO';
 }
 
-export type AuthView = 'LOGIN' | 'REGISTER' | 'FORGOT_PASSWORD';
+export type AuthView = 'LOGIN';
 
 export interface AuthState {
   user: User | null;

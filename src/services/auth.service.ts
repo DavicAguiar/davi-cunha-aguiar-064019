@@ -4,15 +4,17 @@ const API_URL = 'https://pet-manager-api.geia.vip';
 
 export const authService = {
   async login(credentials: any) {
-    const response = await axios.post(`${API_URL}/v1/autenticacao/login`, credentials);
+    const response = await axios.post(`${API_URL}/autenticacao/login`, {
+      username: credentials.username,
+      password: credentials.password
+    });
     return response.data;
   },
   
-  async register(data: any) {
-    return axios.post(`${API_URL}/v1/usuarios/registrar`, data);
-  },
-  
-  async recoverPassword(email: string) {
-    return axios.post(`${API_URL}/v1/usuarios/recuperar-senha`, { email });
+  async refreshToken(token: string) {
+    const response = await axios.put(`${API_URL}/autenticacao/refresh`, {}, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
   }
 };

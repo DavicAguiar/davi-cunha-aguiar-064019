@@ -1,13 +1,17 @@
 import React from 'react';
-import { petFacade } from '../../facades/pet.facade';
-import type { PetState } from '../../models/pet.model';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
+type PaginationModel = {
+  currentPage: number;
+  totalPages: number;
+};
+
 interface PaginationProps {
-  pagination: PetState['pagination'];
+  pagination: PaginationModel;
+  onChangePage: (page: number) => void;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({ pagination }) => {
+export const Pagination: React.FC<PaginationProps> = ({ pagination, onChangePage }) => {
   const { currentPage, totalPages } = pagination;
 
   const pages = Array.from({ length: totalPages }, (_, i) => i);
@@ -18,7 +22,7 @@ export const Pagination: React.FC<PaginationProps> = ({ pagination }) => {
     <div className="flex items-center justify-center gap-2 mt-12 pb-10">
       <button
         disabled={currentPage === 0}
-        onClick={() => petFacade.changePage(currentPage - 1)}
+        onClick={() => onChangePage(currentPage - 1)}
         className="w-12 h-12 flex items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-400 hover:text-emerald-600 hover:border-emerald-200 disabled:opacity-30 disabled:hover:text-slate-400 transition-all shadow-sm"
       >
         <ChevronLeft size={20} />
@@ -28,10 +32,10 @@ export const Pagination: React.FC<PaginationProps> = ({ pagination }) => {
         {pages.map(page => (
           <button
             key={page}
-            onClick={() => petFacade.changePage(page)}
+            onClick={() => onChangePage(page)}
             className={`w-11 h-11 rounded-full text-xs font-black transition-all ${
-              currentPage === page 
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-200 scale-110' 
+              currentPage === page
+                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-200 scale-110'
                 : 'text-slate-400 hover:text-slate-800 hover:bg-white'
             }`}
           >
@@ -42,7 +46,7 @@ export const Pagination: React.FC<PaginationProps> = ({ pagination }) => {
 
       <button
         disabled={currentPage === totalPages - 1}
-        onClick={() => petFacade.changePage(currentPage + 1)}
+        onClick={() => onChangePage(currentPage + 1)}
         className="w-12 h-12 flex items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-400 hover:text-emerald-600 hover:border-emerald-200 disabled:opacity-30 disabled:hover:text-slate-400 transition-all shadow-sm"
       >
         <ChevronRight size={20} />

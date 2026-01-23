@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="160" viewBox="0 0 560 160" role="img" aria-label="Pet Manager">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ECFDF5"></stop>
+      <stop offset="1" stop-color="#FFFFFF"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon -->
+  <g transform="translate(20,16)">
+    <rect x="0" y="0" width="128" height="128" rx="28" fill="url(#bg2)" stroke="#CBD5E1" stroke-width="3"></rect>
+    <circle cx="44" cy="48" r="10" fill="#7C3AED"></circle>
+    <circle cx="64" cy="36" r="12" fill="#7C3AED"></circle>
+    <circle cx="84" cy="48" r="10" fill="#7C3AED"></circle>
+    <path fill="#059669" d="M64 62c-20 0-36 16-36 36 0 16 12 28 36 28s36-12 36-28c0-20-16-36-36-36zm0 18c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9z"></path>
+    <path d="M52 104l7 7 18-20" fill="none" stroke="#334155" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path>
+  </g>
+
+  <!-- Wordmark (sem fontes externas) -->
+  <g transform="translate(170,58)">
+    <text x="0" y="0" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="44" font-weight="800" fill="#0F172A">
+      Pet <tspan fill="#059669">Manager</tspan>
+    </text>
+    <text x="2" y="38" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="18" font-weight="600" fill="#334155">
+      Registro público de pets e tutores
+    </text>
+  </g>
+</svg>

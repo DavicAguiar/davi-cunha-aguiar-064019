@@ -56,6 +56,10 @@ A aplicação é empacotada com **Docker multi-stage**:
 O build final é copiado para:
 - `/usr/share/nginx/html` 
 
+### Iniciar sem build
+
+- **Build Stage:** `node:20-alpine` executar o comando `npm run dev`.
+
 ### Executar via Docker
 
 ```bash

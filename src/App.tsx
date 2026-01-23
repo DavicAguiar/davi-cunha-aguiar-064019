@@ -8,6 +8,7 @@ import { Toast } from './components/global/Toast';
 
 const LoginPage = lazy(() => import('./pages/auth/LoginPage').then(m => ({ default: m.LoginPage })));
 const HomePage = lazy(() => import('./pages/home/HomePage').then(m => ({ default: m.HomePage })));
+const TutorsPage = lazy(() => import('./pages/tutors/TutorsPage').then(m => ({ default: m.TutorsPage })));
 
 const AppLayout = () => (
   <div className="min-h-screen flex flex-col bg-slate-50">
@@ -39,6 +40,8 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<AppLayout />}>
               <Route path="/home" element={<HomePage />} />
+              <Route path="/tutores" element={<TutorsPage />} />
+              
               <Route path="/" element={<Navigate to="/home" replace />} />
             </Route>
           </Route>

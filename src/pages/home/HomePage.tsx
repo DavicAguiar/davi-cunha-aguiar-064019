@@ -87,7 +87,7 @@ export const HomePage: React.FC = () => {
             </div>
           )}
           
-          <Pagination pagination={pagination} />
+          <Pagination pagination={pagination} onChangePage={(p) => petFacade.changePage(p)} />
         </>
       )}
 

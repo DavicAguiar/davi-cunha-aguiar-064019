@@ -21,14 +21,21 @@ export const PetCard: React.FC<{ pet: Pet; onEdit: () => void; onDelete: () => v
             <Dog className="w-16 h-16 stroke-[1.5]" />
           </div>
         )}
-        <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black uppercase text-emerald-600 shadow-sm">
+        <div className="absolute bottom-3 left-3 max-w-[75%] bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black uppercase text-emerald-600 shadow-sm truncate"
+          title={pet.raca || 'S.R.D'}
+        >
           {pet.raca || 'S.R.D'}
         </div>
       </div>
       
       <div className="px-2">
-        <h3 className="text-2xl font-black text-slate-800 mb-1 leading-none tracking-tight">{pet.nome}</h3>
-        <p className="text-xs font-bold text-slate-400 uppercase mb-6 tracking-widest">{pet.idade} Anos</p>
+        <h3 className="text-2xl font-black text-slate-800 mb-1 leading-none tracking-tight truncate" title={pet.nome}>
+          {pet.nome}
+        </h3>
+
+        <p className="text-xs font-bold text-slate-400 uppercase mb-6 tracking-widest">
+          {pet.idade} Anos
+        </p>
         
         <button 
           onClick={onEdit}

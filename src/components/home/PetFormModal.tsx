@@ -11,9 +11,10 @@ interface PetFormModalProps {
 
 export const PetFormModal: React.FC<PetFormModalProps> = ({ isOpen, onClose, petToEdit }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  
-  const MAX_NOME = 80;
-  const MAX_RACA = 80;
+  const normalizeText = (value: string) => value.replace(/\s+/g, ' ').trim();
+
+  const MAX_NOME = 100;
+  const MAX_RACA = 100;
 
   const [form, setForm] = useState({ nome: '', raca: '', idade: '' });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -48,13 +49,23 @@ export const PetFormModal: React.FC<PetFormModalProps> = ({ isOpen, onClose, pet
 
   const validate = () => {
     const errs: Record<string, string> = {};
-    
-    if (!form.nome?.trim()) errs.nome = "Nome é obrigatório";
-    if (!form.raca?.trim()) errs.raca = "Raça é obrigatória";
-    
+
+    const nome = normalizeText(form.nome);
+    const raca = normalizeText(form.raca);
+
+    if (!nome) errs.nome = "Nome é obrigatório";
+    else if (nome.length > MAX_NOME) errs.nome = `Nome deve ter no máximo ${MAX_NOME} caracteres`;
+
+    if (!raca) errs.raca = "Raça é obrigatória";
+    else if (raca.length > MAX_RACA) errs.raca = `Raça deve ter no máximo ${MAX_RACA} caracteres`;
+
     if (!form.idade) errs.idade = "Informe a idade";
-    // if (!previewUrl) errs.foto = "A imagem do pet é obrigatória";
-    
+    else {
+      const idadeNum = Number(form.idade);
+      if (!Number.isInteger(idadeNum)) errs.idade = "Idade deve ser um número inteiro";
+      else if (idadeNum < 0 || idadeNum > 99) errs.idade = "Idade deve estar entre 0 e 99";
+    }
+
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -66,9 +77,9 @@ export const PetFormModal: React.FC<PetFormModalProps> = ({ isOpen, onClose, pet
     setIsSubmitting(true);
     try {
       const payload = {
-        nome: form.nome,
-        raca: form.raca,
-        idade: Number(form.idade)
+        nome: normalizeText(form.nome),
+        raca: normalizeText(form.raca),
+        idade: Number(form.idade),
       };
 
       await petFacade.savePet(

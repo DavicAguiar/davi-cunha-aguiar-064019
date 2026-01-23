@@ -66,7 +66,6 @@ export const LegalModal: React.FC<LegalModalProps> = ({ title, open, onClose, ch
   }, [open, onClose]);
 
   if (!mounted) return null;
-  console.log("LegalModal open=", open, "html has dark?", document.documentElement.classList.contains("dark"));
 
   return (
     <div
@@ -130,10 +129,10 @@ export const LegalModal: React.FC<LegalModalProps> = ({ title, open, onClose, ch
             type="button"
             onClick={onClose}
             className="px-5 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em]
-              text-slate-600 dark:text-slate-200
-              hover:text-slate-900 hover:bg-black/5
-              dark:hover:bg-white/10
-              transition active:scale-95"
+                       text-slate-600 dark:text-slate-200
+                       hover:text-slate-900 hover:bg-black/5
+                       dark:hover:bg-white/10
+                       transition active:scale-95"
           >
             Fechar
           </button>

@@ -8,8 +8,6 @@ import type { Pet } from "../models/pet.model";
 import { petService } from "../services/pet.service";
 
 type PetSearchParams = { nome?: string; page: number; size: number };
-type PetSearchResponse = { content: Pet[]; page: number; pageCount: number; total: number };
-
 const searchTrigger$ = new Subject<void>();
 
 export const tutorFacade = {
@@ -143,11 +141,12 @@ export const tutorFacade = {
 
   async searchPetsToLink(params: PetSearchParams) {
     try {
-      const resp = await petService.getPets(params.page, params.nome ?? "", "");
-      return resp; 
+      const resp = await petService.getPets(params.page, params.nome ?? '', '', params.size ?? 5);
+      return resp;
     } catch (err: any) {
       const msg = err.response?.data?.message || "Falha ao buscar pets para vincular.";
       uiActions.notify(msg, "error");
+      
       return { content: [], page: 0, pageCount: 0, total: 0 };
     }
   },

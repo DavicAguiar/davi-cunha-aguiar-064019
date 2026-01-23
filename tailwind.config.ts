@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 export default {
+  darkMode: "class",
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -9,15 +10,15 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#059669', 
-          dark: '#047857', 
+          DEFAULT: '#059669',
+          dark: '#047857',
         },
         accent: {
           DEFAULT: '#7c3aed',
         },
         neutral: {
-          text: '#334155',  
-          border: '#cbd5e1', 
+          text: '#334155',
+          border: '#cbd5e1',
         }
       },
       backgroundImage: {

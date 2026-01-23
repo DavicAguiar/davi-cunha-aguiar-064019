@@ -62,6 +62,6 @@ export const PetInfoModal: React.FC<Props> = ({ isOpen, pet, onClose }) => {
 const InfoRow: React.FC<{ label: string; value: string }> = ({ label, value }) => (
   <div className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
     <div className="text-[10px] font-black uppercase tracking-widest text-slate-500">{label}</div>
-    <div className="text-slate-800 font-semibold">{value}</div>
+    <div className="text-slate-800 font-semibold whitespace-normal break-words">{value}</div>
   </div>
 );

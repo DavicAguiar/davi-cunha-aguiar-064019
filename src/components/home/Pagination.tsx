@@ -23,7 +23,9 @@ export const Pagination: React.FC<PaginationProps> = ({ pagination, onChangePage
       <button
         disabled={currentPage === 0}
         onClick={() => onChangePage(currentPage - 1)}
-        className="w-12 h-12 flex items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-400 hover:text-emerald-600 hover:border-emerald-200 disabled:opacity-30 disabled:hover:text-slate-400 transition-all shadow-sm"
+        className="w-12 h-12 flex items-center justify-center rounded-2xl border border-slate-200
+         bg-white text-slate-400 hover:text-emerald-600 hover:border-emerald-200
+          disabled:opacity-30 disabled:hover:text-slate-400 transition-all shadow-sm cursor-pointer"
       >
         <ChevronLeft size={20} />
       </button>
@@ -33,7 +35,7 @@ export const Pagination: React.FC<PaginationProps> = ({ pagination, onChangePage
           <button
             key={page}
             onClick={() => onChangePage(page)}
-            className={`w-11 h-11 rounded-full text-xs font-black transition-all ${
+            className={`w-11 h-11 rounded-full text-xs font-black transition-all cursor-pointer ${
               currentPage === page
                 ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-200 scale-110'
                 : 'text-slate-400 hover:text-slate-800 hover:bg-white'
@@ -47,7 +49,10 @@ export const Pagination: React.FC<PaginationProps> = ({ pagination, onChangePage
       <button
         disabled={currentPage === totalPages - 1}
         onClick={() => onChangePage(currentPage + 1)}
-        className="w-12 h-12 flex items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-400 hover:text-emerald-600 hover:border-emerald-200 disabled:opacity-30 disabled:hover:text-slate-400 transition-all shadow-sm"
+        className="w-12 h-12 flex items-center justify-center
+         rounded-2xl border border-slate-200 bg-white text-slate-400
+          hover:text-emerald-600 hover:border-emerald-200 disabled:opacity-30
+           disabled:hover:text-slate-400 transition-all shadow-sm cursor-pointer"
       >
         <ChevronRight size={20} />
       </button>

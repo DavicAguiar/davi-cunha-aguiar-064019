@@ -4,15 +4,16 @@ import api from "./api";
 
 export const petService = {
 
-  async getPets(page: number = 0, nome: string = '', raca: string = ''): Promise<PetApiResponse> {
+  async getPets( page: number = 0,nome: string = '',raca: string = '',size: number = 10): Promise<PetApiResponse> {
     const response = await api.get('/pets', {
       params: {
         page,
-        size: 10,
+        size,
         nome: nome || undefined,
-        raca: raca || undefined 
+        raca: raca || undefined
       }
     });
+    
     return response.data;
   },
 

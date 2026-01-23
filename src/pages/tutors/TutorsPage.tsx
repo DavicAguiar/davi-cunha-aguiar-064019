@@ -61,7 +61,9 @@ export const TutorsPage: React.FC = () => {
 
         <button
           onClick={() => setIsFormOpen(true)}
-          className="px-8 py-4 bg-emerald-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-emerald-200 hover:bg-emerald-700 active:scale-95 transition-all flex items-center gap-2"
+          className="px-8 py-4 bg-emerald-600 text-white rounded-2xl font-black text-xs uppercase
+           tracking-widest shadow-lg shadow-emerald-200 hover:bg-emerald-700 active:scale-95 
+           transition-all flex items-center gap-2 cursor-pointer"
         >
           <span className="text-xl leading-none">+</span> Novo Registro
         </button>

@@ -55,7 +55,9 @@ export const HomePage: React.FC = () => {
 
         <button 
           onClick={() => setIsFormOpen(true)}
-          className="px-8 py-4 bg-emerald-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-emerald-200 hover:bg-emerald-700 active:scale-95 transition-all flex items-center gap-2"
+          className="px-8 py-4 bg-emerald-600 text-white rounded-2xl font-black text-xs uppercase
+           tracking-widest shadow-lg shadow-emerald-200 hover:bg-emerald-700
+            active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
         >
           <span className="text-xl leading-none">+</span> Novo Registro
         </button>
@@ -83,7 +85,9 @@ export const HomePage: React.FC = () => {
             </div>
           ) : (
             <div className="py-40 text-center border-2 border-dashed border-slate-100 rounded-[3rem]">
-              <p className="text-slate-300 font-bold uppercase text-xs tracking-widest">Nenhum pet encontrado com esses filtros</p>
+              <p className="text-slate-300 font-bold uppercase text-xs tracking-widest">
+                Nenhum pet encontrado com esses filtros
+              </p>
             </div>
           )}
           

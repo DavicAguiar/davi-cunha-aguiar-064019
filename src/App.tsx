@@ -11,7 +11,7 @@ const HomePage = lazy(() => import('./pages/home/HomePage').then(m => ({ default
 const TutorsPage = lazy(() => import('./pages/tutors/TutorsPage').then(m => ({ default: m.TutorsPage })));
 
 const AppLayout = () => (
-  <div className="min-h-screen flex flex-col bg-slate-50">
+  <div className="min-h-screen flex flex-col bg-soft-gradient text-neutral-text">
     <Header />
     <main className="flex-grow">
       <Outlet /> 

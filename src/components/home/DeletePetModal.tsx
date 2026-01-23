@@ -35,13 +35,16 @@ export const DeletePetModal: React.FC<DeletePetModalProps> = ({ isOpen, onClose,
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-[100] p-6 animate-in fade-in duration-300">
-      <div className="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl p-10 relative animate-in zoom-in-95 duration-300 text-center">
+    <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex
+     items-center justify-center z-[100] p-6 animate-in fade-in duration-300">
+      <div className="bg-white w-full max-w-md rounded-[2.5rem]
+       shadow-2xl p-10 relative animate-in zoom-in-95 duration-300 text-center">
         
         <button 
           onClick={onClose} 
           disabled={isDeleting}
-          className="absolute top-6 right-6 text-slate-300 hover:text-slate-600 transition-colors disabled:opacity-0"
+          className="absolute top-6 right-6 text-slate-300 hover:text-slate-60
+           transition-colors disabled:opacity-0 cursor-pointer"
         >
           <X size={24} strokeWidth={2} />
         </button>
@@ -53,6 +56,7 @@ export const DeletePetModal: React.FC<DeletePetModalProps> = ({ isOpen, onClose,
         <h3 className="text-2xl font-black text-slate-800 leading-none mb-4">
           Excluir Registro?
         </h3>
+
         <p className="text-sm font-bold text-slate-500 leading-relaxed mb-10">
           Você está prestes a remover 
           <span className="text-slate-800 font-black">"{petToDelete.nome}"</span>
@@ -63,7 +67,9 @@ export const DeletePetModal: React.FC<DeletePetModalProps> = ({ isOpen, onClose,
           <button
             onClick={onClose}
             disabled={isDeleting}
-            className="w-full py-4 bg-slate-100 text-slate-600 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-slate-200 transition-all disabled:opacity-50"
+            className="w-full py-4 bg-slate-100 text-slate-600 rounded-2xl font-black
+             text-[10px] uppercase tracking-[0.2em] hover:bg-slate-200
+              transition-all disabled:opacity-50 cursor-pointer"
           >
             Cancelar
           </button>
@@ -71,7 +77,9 @@ export const DeletePetModal: React.FC<DeletePetModalProps> = ({ isOpen, onClose,
           <button
             onClick={handleDelete}
             disabled={isDeleting}
-            className="w-full py-4 bg-red-600 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-red-200/50 hover:bg-red-700 transition-all flex items-center justify-center gap-3 disabled:opacity-70"
+            className="w-full py-4 bg-red-600 text-white rounded-2xl font-black text-[10px]
+             uppercase tracking-[0.2em] shadow-xl shadow-red-200/50 hover:bg-red-700
+              transition-all flex items-center justify-center gap-3 disabled:opacity-70 cursor-pointer"
           >
             {isDeleting ? (
               <>

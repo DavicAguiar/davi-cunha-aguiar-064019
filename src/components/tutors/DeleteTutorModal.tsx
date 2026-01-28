@@ -1,66 +1,116 @@
-import React, { useState } from 'react';
-import type { Tutor } from '../../models/tutor.model';
-import { tutorFacade } from '../../facades/tutor.facade';
-import { AlertTriangle, X } from 'lucide-react';
+import React, { useState } from "react";
+import { AlertTriangle, X, Trash2 } from "lucide-react";
+import { tutorFacade } from "../../facades/tutor.facade";
+import type { Tutor } from "../../models/tutor.model";
+import { uiActions } from "../../state/ui.state";
 
 interface DeleteTutorModalProps {
   isOpen: boolean;
   onClose: () => void;
-  tutorToDelete?: Tutor | null;
+  tutorToDelete: Tutor | null;
 }
 
-export const DeleteTutorModal: React.FC<DeleteTutorModalProps> = ({ isOpen, onClose, tutorToDelete }) => {
-  const [submitting, setSubmitting] = useState(false);
+export const DeleteTutorModal: React.FC<DeleteTutorModalProps> = ({
+  isOpen,
+  onClose,
+  tutorToDelete,
+}) => {
+  const [isDeleting, setIsDeleting] = useState(false);
 
   if (!isOpen || !tutorToDelete) return null;
 
   const handleDelete = async () => {
-    setSubmitting(true);
+    if (!tutorToDelete.id) return;
+
+    setIsDeleting(true);
     try {
       await tutorFacade.deleteTutor(tutorToDelete.id);
+      uiActions.notify("O registro foi removido com sucesso!", "success");
       onClose();
+    } catch (error: any) {
+      const errorMsg = error.response?.data?.message || "Falha ao excluir o registro.";
+      uiActions.notify(errorMsg, "error");
+      console.error("Erro detalhado na exclusão:", error);
     } finally {
-      setSubmitting(false);
+      setIsDeleting(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-md flex items-center justify-center z-[110] p-6">
-      <div className="bg-white w-full max-w-xl rounded-[3rem] shadow-2xl overflow-hidden p-10 relative">
-        <button onClick={onClose} className="absolute top-8 right-8 text-slate-300 hover:text-red-500 transition-colors">
-          <X size={28} strokeWidth={1.5} />
+    <div
+      className="fixed inset-0 flex items-center justify-center z-[100] p-6 animate-in fade-in duration-200
+                 bg-[color:var(--modal-overlay-strong)] backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        className="w-full max-w-md rounded-[2.5rem] p-10 relative text-center animate-in zoom-in-95 duration-200
+                   bg-[color:var(--modal-bg)] border border-[color:var(--modal-border)]
+                   text-[color:var(--modal-text)]"
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          disabled={isDeleting}
+          className="absolute top-6 right-6 rounded-xl p-2 transition-colors cursor-pointer
+                     text-[color:var(--modal-muted-2)]
+                     hover:bg-[color:var(--modal-ghost-hover-bg)]
+                     disabled:opacity-50 disabled:pointer-events-none"
+          aria-label="Fechar"
+        >
+          <X size={22} strokeWidth={2} />
         </button>
 
-        <div className="flex items-start gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center">
-            <AlertTriangle />
-          </div>
-
-          <div>
-            <h3 className="text-xl font-black text-slate-800 tracking-tight">Confirmar exclusão</h3>
-            <p className="text-sm text-slate-600 mt-2">
-              Você tem certeza que deseja excluir o tutor <span className="font-bold">{tutorToDelete.nome}</span>?
-            </p>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-3">
-              Esta ação não poderá ser desfeita
-            </p>
-          </div>
+        <div className="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-red-500/10 mb-8">
+          <AlertTriangle className="h-12 w-12 text-red-500" strokeWidth={1.5} />
         </div>
 
-        <div className="mt-10 flex justify-end gap-3">
+        <h3 className="text-2xl font-black leading-none mb-4 text-[color:var(--modal-text)]">
+          Excluir Registro?
+        </h3>
+
+        <p className="text-sm font-bold leading-relaxed mb-10 text-[color:var(--modal-muted)]">
+          Você está prestes a remover{" "}
+          <span className="text-[color:var(--modal-text)] font-black">
+            "{tutorToDelete.nome}"
+          </span>{" "}
+          permanentemente do sistema. Essa ação não pode ser desfeita.
+        </p>
+
+        <div className="flex flex-col-reverse sm:flex-row gap-4">
           <button
+            type="button"
             onClick={onClose}
-            className="px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest bg-slate-50 text-slate-600 hover:bg-slate-100 active:scale-95 transition"
+            disabled={isDeleting}
+            className="w-full py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em]
+                       border border-[color:var(--modal-border)]
+                       bg-[color:var(--modal-bg)] text-[color:var(--modal-muted)]
+                       hover:bg-[color:var(--modal-ghost-hover-bg)] hover:text-[color:var(--modal-text)]
+                       transition-all disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
           >
             Cancelar
           </button>
 
           <button
+            type="button"
             onClick={handleDelete}
-            disabled={submitting}
-            className="px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest bg-red-600 text-white hover:bg-red-700 active:scale-95 transition disabled:opacity-60"
+            disabled={isDeleting}
+            className="w-full py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em]
+                       bg-red-600 text-white hover:bg-red-700
+                       transition-all flex items-center justify-center gap-3
+                       disabled:opacity-70 disabled:pointer-events-none cursor-pointer"
           >
-            {submitting ? 'Excluindo...' : 'Excluir'}
+            {isDeleting ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <span>Excluindo...</span>
+              </>
+            ) : (
+              <>
+                <Trash2 size={16} />
+                <span>Sim, Excluir</span>
+              </>
+            )}
           </button>
         </div>
       </div>

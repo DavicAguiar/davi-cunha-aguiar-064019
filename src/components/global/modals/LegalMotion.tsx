@@ -17,13 +17,10 @@ function lockBodyScroll() {
   const prevOverflow = body.style.overflow;
   const prevPaddingRight = body.style.paddingRight;
 
-  // largura da scrollbar (0 se não existir)
   const scrollbarWidth = window.innerWidth - docEl.clientWidth;
 
   body.style.overflow = "hidden";
-  if (scrollbarWidth > 0) {
-    body.style.paddingRight = `${scrollbarWidth}px`;
-  }
+  if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
 
   return () => {
     body.style.overflow = prevOverflow;
@@ -33,7 +30,6 @@ function lockBodyScroll() {
 
 export const LegalModal: React.FC<LegalModalProps> = ({ title, open, onClose, children }) => {
   const titleId = useId();
-
   const [mounted, setMounted] = useState(open);
   const [visible, setVisible] = useState(open);
 
@@ -43,7 +39,6 @@ export const LegalModal: React.FC<LegalModalProps> = ({ title, open, onClose, ch
       requestAnimationFrame(() => setVisible(true));
       return;
     }
-
     setVisible(false);
     const t = window.setTimeout(() => setMounted(false), ANIMATION_MS);
     return () => window.clearTimeout(t);
@@ -68,19 +63,14 @@ export const LegalModal: React.FC<LegalModalProps> = ({ title, open, onClose, ch
   if (!mounted) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center px-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby={titleId}
-    >
+    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4" role="dialog" aria-modal="true" aria-labelledby={titleId}>
       <button
         type="button"
         aria-label="Fechar modal"
         onClick={onClose}
         className={[
           "absolute inset-0 backdrop-blur-sm transition-opacity",
-          "bg-slate-900/40 dark:bg-slate-950/60",
+          "bg-[color:var(--modal-overlay)] cursor-pointer",
           visible ? "opacity-100" : "opacity-0",
         ].join(" ")}
         style={{ transitionDuration: `${ANIMATION_MS}ms` }}
@@ -89,9 +79,9 @@ export const LegalModal: React.FC<LegalModalProps> = ({ title, open, onClose, ch
       <div
         className={[
           "relative w-full max-w-2xl rounded-2xl overflow-hidden",
-          "bg-white border border-slate-200 shadow-2xl",
-          "dark:bg-slate-900 dark:border-slate-800",
-          "transition-all",
+          "border shadow-2xl transition-all",
+          "bg-[color:var(--modal-bg)] border-[color:var(--modal-border)]",
+          "text-[color:var(--modal-text)]",
           visible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-2 scale-[0.98]",
         ].join(" ")}
         style={{ transitionDuration: `${ANIMATION_MS}ms` }}
@@ -99,15 +89,15 @@ export const LegalModal: React.FC<LegalModalProps> = ({ title, open, onClose, ch
         <div
           className={[
             "flex items-center justify-between px-6 py-4 border-b",
-            "border-slate-200 bg-gradient-to-br from-white to-emerald-50/40",
-            "dark:border-slate-800 dark:from-slate-900 dark:to-emerald-900/10",
+            "border-[color:var(--modal-border)]",
+            "bg-[image:var(--modal-header-bg)]",
           ].join(" ")}
         >
           <div>
-            <h2 id={titleId} className="text-sm font-black uppercase tracking-wider text-slate-900 dark:text-slate-100">
+            <h2 id={titleId} className="text-sm font-black uppercase tracking-wider text-[color:var(--modal-text)]">
               {title}
             </h2>
-            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
+            <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[color:var(--modal-muted-2)]">
               Pet • SEPLAG
             </p>
           </div>
@@ -115,24 +105,25 @@ export const LegalModal: React.FC<LegalModalProps> = ({ title, open, onClose, ch
           <button
             type="button"
             onClick={onClose}
-            className="p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 active:scale-95 transition"
+            className="p-2 rounded-xl active:scale-95 transition"
+            style={{ backgroundColor: "transparent" }}
             aria-label="Fechar"
           >
-            <X size={18} className="text-slate-600 dark:text-slate-200" />
+            <span className="inline-flex rounded-xl p-2 hover:bg-[color:var(--modal-ghost-hover-bg)] transition cursor-pointer">
+              <X size={18} className="text-[color:var(--modal-muted)]" />
+            </span>
           </button>
         </div>
 
         <div className="px-6 py-5 max-h-[70vh] overflow-auto">{children}</div>
 
-        <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex justify-end">
+        <div className="px-6 py-4 border-t border-[color:var(--modal-border)] bg-[color:var(--modal-bg)] flex justify-end">
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em]
-                       text-slate-600 dark:text-slate-200
-                       hover:text-slate-900 hover:bg-black/5
-                       dark:hover:bg-white/10
-                       transition active:scale-95"
+            className="px-5 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition active:scale-95
+                       text-[color:var(--modal-muted)] hover:text-[color:var(--modal-text)]
+                        hover:bg-[color:var(--modal-ghost-hover-bg)] cursor-pointer"
           >
             Fechar
           </button>

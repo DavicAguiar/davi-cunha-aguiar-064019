@@ -12,16 +12,24 @@ const Motion: React.FC<{ delay?: number; children: React.ReactNode }> = ({ delay
 
 export const SupportContent: React.FC = () => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 text-[color:var(--nav-text)]">
       <Motion delay={0}>
-        <p className="text-sm font-bold text-slate-800 dark:text-slate-100">
+        <p className="text-sm font-bold text-[color:var(--nav-text)]">
           Informações de contatos.
         </p>
       </Motion>
 
       <Motion delay={40}>
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4">
-          <h3 className="text-xs font-black text-slate-800 dark:text-slate-100 uppercase tracking-widest">
+        <div
+          className={[
+            "rounded-2xl border p-4",
+            "border-[color:var(--nav-border)]",
+            "bg-[color:var(--nav-bg)]",
+            "backdrop-blur-[2px]",
+            "shadow-[0_1px_0_rgba(15,23,42,0.04)] dark:shadow-none",
+          ].join(" ")}
+        >
+          <h3 className="text-xs font-black uppercase tracking-widest text-[color:var(--nav-text)]">
             Canais de atendimento
           </h3>
 
@@ -33,11 +41,13 @@ export const SupportContent: React.FC = () => {
                 </div>
 
                 <div className="min-w-0">
-                  <p className="text-sm font-black text-slate-800 dark:text-slate-100">E-mail</p>
-                  <p className="text-sm text-slate-700 dark:text-slate-200 break-words">
+                  <p className="text-sm font-black text-[color:var(--nav-text)]">E-mail</p>
+
+                  <p className="text-sm text-[color:var(--nav-muted)] break-words">
                     davicunhap2@gmail.com
                   </p>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 mt-1">
+
+                  <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.25em] text-[color:var(--nav-muted-2)]">
                     Resposta em até 1 dia útil
                   </p>
                 </div>
@@ -51,9 +61,13 @@ export const SupportContent: React.FC = () => {
                 </div>
 
                 <div className="min-w-0">
-                  <p className="text-sm font-black text-slate-800 dark:text-slate-100">Telefone</p>
-                  <p className="text-sm text-slate-700 dark:text-slate-200">(65) 0000-0000</p>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 mt-1">
+                  <p className="text-sm font-black text-[color:var(--nav-text)]">Telefone</p>
+
+                  <p className="text-sm text-[color:var(--nav-muted)]">
+                    (65) 0000-0000
+                  </p>
+
+                  <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.25em] text-[color:var(--nav-muted-2)]">
                     Seg–Sex • 08:00–18:00
                   </p>
                 </div>

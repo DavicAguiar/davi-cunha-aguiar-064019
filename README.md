@@ -58,7 +58,7 @@ O build final é copiado para:
 
 ### Iniciar sem build
 
-- **Build Stage:** `node:20-alpine` executar o comando `npm run dev`.
+- **Build Stage:** executar o comando `npm run dev`.
 
 ### Executar via Docker
 

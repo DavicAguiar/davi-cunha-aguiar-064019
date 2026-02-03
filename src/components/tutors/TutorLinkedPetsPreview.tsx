@@ -68,10 +68,10 @@ export const TutorLinkedPetsPreview: React.FC<Props> = ({ tutorId, onManageClick
           onClick={onManageClick}
           disabled={!tutorId}
           className="px-4 py-2 rounded-xl border text-[10px] font-black uppercase tracking-widest transition
-                     bg-[color:var(--nav-bg)] border-[color:var(--nav-border)]
-                     text-[color:var(--nav-muted)]
-                     hover:bg-[color:var(--modal-ghost-hover-bg)] hover:text-[color:var(--nav-text)]
-                     disabled:opacity-40 disabled:cursor-not-allowed"
+            bg-[color:var(--nav-bg)] border-[color:var(--nav-border)]
+            text-[color:var(--nav-muted)]
+            hover:bg-[color:var(--modal-ghost-hover-bg)] hover:text-[color:var(--nav-text)]
+            disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
           title={!tutorId ? "Salve o tutor primeiro para gerenciar vínculos" : undefined}
         >
           Gerenciar
@@ -83,7 +83,7 @@ export const TutorLinkedPetsPreview: React.FC<Props> = ({ tutorId, onManageClick
           <div
             key={p.id}
             className="flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 overflow-hidden
-                       border-[color:var(--nav-border)] bg-[color:var(--nav-bg)]"
+              border-[color:var(--nav-border)] bg-[color:var(--nav-bg)]"
           >
             <div className="min-w-0">
               <p className="font-black truncate text-[color:var(--nav-text)]">{p.nome}</p>
@@ -97,9 +97,9 @@ export const TutorLinkedPetsPreview: React.FC<Props> = ({ tutorId, onManageClick
                 type="button"
                 onClick={() => onViewPet(p)}
                 className="px-3 py-2 rounded-xl border text-[10px] font-black uppercase tracking-widest transition
-                           bg-[color:var(--nav-bg)] border-[color:var(--nav-border)]
-                           text-[color:var(--nav-muted)]
-                           hover:border-violet-300 hover:text-violet-600 flex items-center gap-2"
+                  bg-[color:var(--nav-bg)] border-[color:var(--nav-border)]
+                  text-[color:var(--nav-muted)]
+                  hover:border-violet-300 hover:text-violet-600 flex items-center gap-2 cursor-pointer"
               >
                 <Eye className="w-4 h-4" />
                 Ver
@@ -109,9 +109,9 @@ export const TutorLinkedPetsPreview: React.FC<Props> = ({ tutorId, onManageClick
                 type="button"
                 onClick={() => confirmRemove(p)}
                 className="w-10 h-10 rounded-xl border transition flex items-center justify-center
-                           bg-[color:var(--nav-bg)] border-[color:var(--nav-border)]
-                           text-[color:var(--nav-muted)]
-                           hover:border-red-200 hover:text-red-600"
+                  bg-[color:var(--nav-bg)] border-[color:var(--nav-border)]
+                  text-[color:var(--nav-muted)]
+                  hover:border-red-200 hover:text-red-600 cursor-pointer"
                 aria-label={`Desvincular ${p.nome}`}
                 title="Desvincular"
               >

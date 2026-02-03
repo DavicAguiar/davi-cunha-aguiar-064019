@@ -211,16 +211,16 @@ export const TutorFormModal: React.FC<TutorFormModalProps> = ({ isOpen, onClose,
     <div className="fixed inset-0 bg-[color:var(--modal-overlay-strong)] backdrop-blur-md flex items-center justify-center z-[100] p-4">
       <div
         className="bg-[color:var(--modal-bg)] text-[color:var(--modal-text)]
-                   w-full max-w-4xl max-h-[85vh] rounded-[2.5rem] overflow-hidden flex flex-col
-                   border border-[color:var(--modal-border)] shadow-2xl"
+          w-full max-w-4xl max-h-[85vh] rounded-[2.5rem] overflow-hidden flex flex-col
+          border border-[color:var(--modal-border)] shadow-2xl"
       >
         {/* Header */}
         <div className="relative px-6 sm:px-8 py-5 border-b border-[color:var(--modal-border)] bg-[image:var(--modal-header-bg)]">
           <button
             onClick={onClose}
             className="absolute top-5 right-5 rounded-xl p-2 transition-colors
-                       text-[color:var(--modal-muted-2)]
-                       hover:bg-[color:var(--modal-ghost-hover-bg)]"
+              text-[color:var(--modal-muted-2)]
+              hover:bg-[color:var(--modal-ghost-hover-bg)] cursor-pointer"
             aria-label="Fechar modal"
             type="button"
           >
@@ -258,9 +258,9 @@ export const TutorFormModal: React.FC<TutorFormModalProps> = ({ isOpen, onClose,
             <div onClick={() => fileInputRef.current?.click()} className="group cursor-pointer flex flex-col items-center gap-4">
               <div
                 className="w-36 h-36 rounded-full bg-[color:var(--modal-bg)]
-                           border-2 border-dashed border-[color:var(--modal-border)]
-                           overflow-hidden flex items-center justify-center
-                           group-hover:border-emerald-500 transition-all"
+                  border-2 border-dashed border-[color:var(--modal-border)]
+                  overflow-hidden flex items-center justify-center
+                  group-hover:border-emerald-500 transition-all"
               >
                 {previewUrl ? (
                   <img
@@ -278,10 +278,10 @@ export const TutorFormModal: React.FC<TutorFormModalProps> = ({ isOpen, onClose,
               <button
                 type="button"
                 className="px-4 py-2 rounded-xl bg-[color:var(--modal-bg)] border border-[color:var(--modal-border)]
-                           text-[10px] font-black uppercase tracking-widest
-                           text-[color:var(--modal-muted)]
-                           hover:bg-[color:var(--modal-ghost-hover-bg)] hover:text-[color:var(--modal-text)]
-                           transition-all"
+                  text-[10px] font-black uppercase tracking-widest
+                  text-[color:var(--modal-muted)]
+                  hover:bg-[color:var(--modal-ghost-hover-bg)] hover:text-[color:var(--modal-text)]
+                  transition-all cursor-pointer"
               >
                 {previewUrl ? "Trocar foto" : "Adicionar foto"}
               </button>
@@ -420,9 +420,10 @@ export const TutorFormModal: React.FC<TutorFormModalProps> = ({ isOpen, onClose,
                     type="submit"
                     disabled={isSubmitting}
                     className="sm:col-span-2 py-5 rounded-[1.6rem] font-black text-[10px] uppercase tracking-[0.35em]
-                               bg-[color:var(--primary)] text-white hover:bg-[color:var(--primary-hover)]
-                               transition-all flex items-center justify-center gap-3 disabled:opacity-50
-                               focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--primary)]"
+                              bg-[color:var(--primary)] text-white hover:bg-[color:var(--primary-hover)]
+                              transition-all flex items-center justify-center gap-3 disabled:opacity-50
+                              focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--primary)]
+                              cursor-pointer"
                   >
                     {isSubmitting ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
@@ -461,8 +462,7 @@ function inputClass(hasError: boolean, accent: "primary" | "accent" = "primary")
   ].join(" ");
 }
 
-const TabButton: React.FC<
-  React.PropsWithChildren<{ active: boolean; onClick: () => void; disabled?: boolean; title?: string }>
+const TabButton: React.FC<React.PropsWithChildren<{ active: boolean; onClick: () => void; disabled?: boolean; title?: string }>
 > = ({ active, onClick, disabled, title, children }) => (
   <button
     type="button"
@@ -470,7 +470,7 @@ const TabButton: React.FC<
     disabled={disabled}
     title={title}
     className={[
-      "px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition border",
+      "px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition border cursor-pointer",
       disabled ? "opacity-40 cursor-not-allowed" : "hover:scale-[1.02] active:scale-95",
       active
         ? "bg-[color:var(--primary)] text-white border-[color:var(--primary)]"

@@ -12,7 +12,6 @@
   --nav-muted-2: #94a3b8; 
 
   --primary: #059669;
-  --primary-hover: color-mix(in srgb, var(--primary) 88%, black);
   --primary-hover: #047857;
   --accent: #7c3aed;
 

@@ -3,7 +3,12 @@ export interface User {
   perfil: 'ADMIN' | 'USUARIO';
 }
 
-export type AuthView = 'LOGIN';
+export type AuthView = 'LOGIN' | 'MFA';
+
+export interface AuthTokens {
+  access_token: string;
+  refresh_token?: string;
+}
 
 export interface AuthState {
   user: User | null;

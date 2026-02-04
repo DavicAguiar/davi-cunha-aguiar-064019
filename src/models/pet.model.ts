@@ -9,6 +9,7 @@ export interface Pet {
     contentType: string;
     url: string;
   };
+  tutores?: Tutor[];
 }
 
 export interface PetApiResponse {
@@ -34,3 +35,18 @@ export interface PetState {
     page: number;
   };
 }
+
+export type Tutor = {
+  id: number;
+  nome: string;
+  email?: string | null;
+  telefone?: string | null;
+  endereco?: string | null;
+  cpf?: string | null;
+  foto?: { 
+    id: number; 
+    nome: string; 
+    contentType: string; 
+    url: string 
+  };
+};

@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
 
   return (
     <>
-      <footer className="mt-auto py-10
+      <footer className="mt-4 py-10
         bg-[var(--nav-bg)] border-t border-[var(--nav-border)]
         text-[var(--nav-text)]
         backdrop-blur-[2px] dark:backdrop-blur-md

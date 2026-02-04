@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { petFacade } from "../../facades/pet.facade";
-import { PetFilters } from "../../components/home/PetFilters";
-import { PetCard } from "../../components/home/PetCard";
-import { PetFormModal } from "../../components/home/PetFormModal";
+import { PetFilters } from "../../components/pets/PetFilters";
+import { PetCard } from "../../components/pets/PetCard";
+import { PetFormModal } from "../../components/pets/PetFormModal";
 import { Pagination } from "../../components/global/Pagination";
 import type { Pet, PetState } from "../../models/pet.model";
-import { DeletePetModal } from "../../components/home/DeletePetModal";
+import { DeletePetModal } from "../../components/pets/DeletePetModal";
 import { Plus } from "lucide-react";
 
-export const HomePage: React.FC = () => {
+export const PetsPage: React.FC = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [selectedPet, setSelectedPet] = useState<Pet | null>(null);
@@ -36,11 +36,6 @@ export const HomePage: React.FC = () => {
       behavior: prefersReducedMotion ? "auto" : "smooth",
       block: "start",
     });
-  };
-
-  const handleEdit = (pet: Pet) => {
-    setSelectedPet(pet);
-    setIsFormOpen(true);
   };
 
   const handleDeleteTrigger = (pet: Pet) => {
@@ -95,8 +90,8 @@ export const HomePage: React.FC = () => {
         <button
           onClick={() => setIsFormOpen(true)}
           className="px-8 py-4 bg-emerald-600 text-white rounded-2xl font-black text-xs uppercase
-                     tracking-widest hover:bg-emerald-700
-                     active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
+            tracking-widest hover:bg-emerald-700
+            active:scale-95 transition-all flex items-center gap-2 cursor-pointer"
         >
           <Plus size={18} strokeWidth={3} />
           Novo Registro
@@ -129,7 +124,6 @@ export const HomePage: React.FC = () => {
                 <PetCard
                   key={pet.id}
                   pet={pet}
-                  onEdit={() => handleEdit(pet)}
                   onDelete={() => handleDeleteTrigger(pet)}
                 />
               ))}

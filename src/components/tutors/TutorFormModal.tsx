@@ -8,7 +8,7 @@ import { tutorFacade } from "../../facades/tutor.facade";
 import { TutorPetLinker } from "./TutorPetLinker";
 import { TutorLinkedPetsPreview } from "./TutorLinkedPetsPreview";
 import { FormField } from "../form/FormField";
-import { PetInfoModal } from "../home/PetInfoModal";
+import { PetInfoModal } from "../pets/PetInfoModal";
 
 interface TutorFormModalProps {
   isOpen: boolean;
@@ -209,12 +209,10 @@ export const TutorFormModal: React.FC<TutorFormModalProps> = ({ isOpen, onClose,
 
   return (
     <div className="fixed inset-0 bg-[color:var(--modal-overlay-strong)] backdrop-blur-md flex items-center justify-center z-[100] p-4">
-      <div
-        className="bg-[color:var(--modal-bg)] text-[color:var(--modal-text)]
+      <div className="bg-[color:var(--modal-bg)] text-[color:var(--modal-text)]
           w-full max-w-4xl max-h-[85vh] rounded-[2.5rem] overflow-hidden flex flex-col
           border border-[color:var(--modal-border)] shadow-2xl"
       >
-        {/* Header */}
         <div className="relative px-6 sm:px-8 py-5 border-b border-[color:var(--modal-border)] bg-[image:var(--modal-header-bg)]">
           <button
             onClick={onClose}
@@ -234,7 +232,6 @@ export const TutorFormModal: React.FC<TutorFormModalProps> = ({ isOpen, onClose,
             </span>
           </h3>
 
-          {/* Tabs */}
           <div className="mt-4 flex items-center gap-2">
             <TabButton active={tab === "dados"} onClick={() => setTab("dados")}>
               Dados
@@ -251,13 +248,10 @@ export const TutorFormModal: React.FC<TutorFormModalProps> = ({ isOpen, onClose,
           </div>
         </div>
 
-        {/* Corpo */}
         <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] flex-1 overflow-hidden">
-          {/* Foto */}
           <aside className="bg-[image:var(--modal-header-bg)] border-b lg:border-b-0 lg:border-r border-[color:var(--modal-border)] p-5">
             <div onClick={() => fileInputRef.current?.click()} className="group cursor-pointer flex flex-col items-center gap-4">
-              <div
-                className="w-36 h-36 rounded-full bg-[color:var(--modal-bg)]
+              <div className="w-36 h-36 rounded-full bg-[color:var(--modal-bg)]
                   border-2 border-dashed border-[color:var(--modal-border)]
                   overflow-hidden flex items-center justify-center
                   group-hover:border-emerald-500 transition-all"
@@ -294,7 +288,6 @@ export const TutorFormModal: React.FC<TutorFormModalProps> = ({ isOpen, onClose,
             </div>
           </aside>
 
-          {/* Conteúdo */}
           <section className="overflow-y-auto bg-[color:var(--modal-bg)]">
             {tab === "dados" ? (
               <div className="p-6 sm:p-8">
@@ -409,7 +402,6 @@ export const TutorFormModal: React.FC<TutorFormModalProps> = ({ isOpen, onClose,
                     </FormField>
                   </div>
 
-                  {/* Preview de vínculos */}
                   {tutorToEdit?.id ? (
                     <div className="sm:col-span-2">
                       <TutorLinkedPetsPreview tutorId={tutorToEdit.id} onManageClick={() => setTab("pets")} onViewPet={openPet} />

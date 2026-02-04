@@ -5,17 +5,23 @@ import { authFacade } from './facades/auth.facade';
 import { Header } from './components/global/Header';
 import { Footer } from './components/global/Footer';
 import { Toast } from './components/global/Toast';
+import { PetDetailsPage } from './pages/pets/PetDetailsPage';
 
 const LoginPage = lazy(() => import('./pages/auth/LoginPage').then(m => ({ default: m.LoginPage })));
-const HomePage = lazy(() => import('./pages/home/HomePage').then(m => ({ default: m.HomePage })));
+const PetPage = lazy(() => import('./pages/pets/PetsPage').then(m => ({ default: m.PetsPage })));
 const TutorsPage = lazy(() => import('./pages/tutors/TutorsPage').then(m => ({ default: m.TutorsPage })));
+const TutorDetailsPage = lazy(() => import("./pages/tutors/TutorDetailsPage").then((m) => ({ default: m.TutorDetailsPage })));
+const NotFoundPublic = lazy(() => import("./pages/notfound/NotFoundPublic").then(m => ({ default: m.NotFoundPublic })));
+const NotFoundPrivate = lazy(() => import("./pages/notfound/NotFoundPrivate").then(m => ({ default: m.NotFoundPrivate })));
 
 const AppLayout = () => (
   <div className="min-h-screen flex flex-col bg-soft-gradient text-neutral-text">
     <Header />
+
     <main className="flex-grow">
       <Outlet /> 
     </main>
+
     <Footer />
   </div>
 );
@@ -39,14 +45,17 @@ function App() {
          {/* Rotas Privadas */}
           <Route element={<ProtectedRoute />}>
             <Route element={<AppLayout />}>
-              <Route path="/home" element={<HomePage />} />
+              <Route path="/" element={<Navigate to="/pets" replace />} />
+              <Route path="/pets" element={<PetPage />} />
+              <Route path="/pets/:id" element={<PetDetailsPage />} />
               <Route path="/tutores" element={<TutorsPage />} />
-              
-              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route path="/tutores/:id" element={<TutorDetailsPage />} />
+
+              <Route path="*" element={<NotFoundPrivate />} />
             </Route>
           </Route>
 
-          <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path="*" element={<NotFoundPublic />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

@@ -71,7 +71,7 @@ export const authFacade = {
       
       const user: User = { 
         username: credentials.username, 
-        perfil: credentials.username === 'admin' ? 'ADMIN' : 'USUARIO' 
+        perfil: 'ADMIN' 
       };
       
       authStateActions.setLogin(user, response.access_token, response.refresh_token);
@@ -89,14 +89,12 @@ export const authFacade = {
       return;
     }
 
-    // Evita outras chamadas
     if (refreshInFlight) {
       try {
         const tokens = await refreshInFlight;
         authStateActions.setTokens(tokens.access_token, tokens.refresh_token ?? null);
         scheduleRefreshFromAccessToken(tokens.access_token);
       } catch {
-        //Falha é tratada abaixo
       }
       return;
     }

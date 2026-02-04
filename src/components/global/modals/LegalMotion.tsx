@@ -76,8 +76,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ title, open, onClose, ch
         style={{ transitionDuration: `${ANIMATION_MS}ms` }}
       />
 
-      <div
-        className={[
+      <div className={[
           "relative w-full max-w-2xl rounded-2xl overflow-hidden",
           "border shadow-2xl transition-all",
           "bg-[color:var(--modal-bg)] border-[color:var(--modal-border)]",
@@ -86,8 +85,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ title, open, onClose, ch
         ].join(" ")}
         style={{ transitionDuration: `${ANIMATION_MS}ms` }}
       >
-        <div
-          className={[
+        <div className={[
             "flex items-center justify-between px-6 py-4 border-b",
             "border-[color:var(--modal-border)]",
             "bg-[image:var(--modal-header-bg)]",
@@ -97,6 +95,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({ title, open, onClose, ch
             <h2 id={titleId} className="text-sm font-black uppercase tracking-wider text-[color:var(--modal-text)]">
               {title}
             </h2>
+
             <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[color:var(--modal-muted-2)]">
               Pet • SEPLAG
             </p>

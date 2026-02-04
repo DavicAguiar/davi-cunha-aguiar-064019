@@ -13,10 +13,7 @@ type FormFieldProps = {
 export const FormField = React.memo<FormFieldProps>(
   ({ label, id, error, touched, used, max, children }) => (
     <div className="flex flex-col gap-2">
-      <label
-        htmlFor={id}
-        className="text-[10px] font-black uppercase ml-1 tracking-widest text-[color:var(--modal-muted-2)]"
-      >
+      <label htmlFor={id} className="text-[10px] font-black uppercase ml-1 tracking-widest text-[color:var(--modal-muted-2)]">
         {label}
       </label>
 
@@ -46,4 +43,5 @@ export const FormField = React.memo<FormFieldProps>(
     </div>
   )
 );
+
 FormField.displayName = "FormField";

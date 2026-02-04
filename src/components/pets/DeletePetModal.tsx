@@ -37,16 +37,14 @@ export const DeletePetModal: React.FC<DeletePetModalProps> = ({
   };
 
   return (
-    <div
-      className="fixed inset-0 flex items-center justify-center z-[100] p-6 animate-in fade-in duration-200
-                 bg-[color:var(--modal-overlay-strong)] backdrop-blur-sm"
+    <div className="fixed inset-0 flex items-center justify-center z-[100] p-6 animate-in fade-in duration-200
+      bg-[color:var(--modal-overlay-strong)] backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
     >
-      <div
-        className="w-full max-w-md rounded-[2.5rem] p-10 relative text-center animate-in zoom-in-95 duration-200
-                   bg-[color:var(--modal-bg)] border border-[color:var(--modal-border)]
-                   text-[color:var(--modal-text)]"
+      <div className="w-full max-w-md rounded-[2.5rem] p-10 relative text-center animate-in zoom-in-95 duration-200
+          bg-[color:var(--modal-bg)] border border-[color:var(--modal-border)]
+          text-[color:var(--modal-text)]"
       >
         <button
           type="button"

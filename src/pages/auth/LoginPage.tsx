@@ -9,7 +9,7 @@ export const LoginPage: React.FC = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/home', { replace: true });
+      navigate('/pets', { replace: true });
     }
   }, [isAuthenticated, navigate]);
 
@@ -20,6 +20,7 @@ export const LoginPage: React.FC = () => {
           <h1 className="text-2xl font-black text-slate-800 uppercase tracking-tight">
             Pet Manager <span className="text-emerald-600 font-medium">SEPLAG</span>
           </h1>
+          
           <p className="text-slate-500 font-medium text-sm mt-2 uppercase tracking-wider">
             Acesso Restrito
           </p>

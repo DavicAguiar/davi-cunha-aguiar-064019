@@ -115,9 +115,11 @@ export const tutorFacade = {
     try {
       await tutorService.vincularPet(tutorId, petId);
       uiActions.notify("Pet vinculado ao tutor com sucesso!", "success");
+
       this.loadTutores();
     } catch (err: any) {
       const msg = err.response?.data?.message || "Erro ao vincular pet.";
+
       tutorStateActions.updateState({ loading: false, error: msg });
       uiActions.notify(msg, "error");
       throw err;
@@ -131,6 +133,7 @@ export const tutorFacade = {
       const tutor = await tutorService.getTutorById(tutorId);
 
       const pets = (tutor as any).pets ?? (tutor as any).petsVinculados ?? [];
+
       return Array.isArray(pets) ? pets : [];
     } catch (err: any) {
       const msg = err.response?.data?.message || "Falha ao carregar pets vinculados.";
@@ -156,10 +159,12 @@ export const tutorFacade = {
 
     try {
       await tutorService.desvincularPet(tutorId, petId);
+
       uiActions.notify("Vínculo removido com sucesso!", "success");
       this.loadTutores();
     } catch (err: any) {
       const msg = err.response?.data?.message || "Erro ao remover vínculo.";
+      
       tutorStateActions.updateState({ loading: false, error: msg });
       uiActions.notify(msg, "error");
       throw err;

@@ -53,3 +53,11 @@ export type TutorState = {
     page: number;
   };
 };
+
+export type TutorSummary = {
+  id: number;
+  nome: string;
+  contato?: string;   // se a API vier assim
+  telefone?: string;
+  email?: string;
+};

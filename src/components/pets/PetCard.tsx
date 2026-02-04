@@ -1,12 +1,11 @@
 import React from "react";
 import type { Pet } from "../../models/pet.model";
 import { Trash2, Eye, Dog } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-export const PetCard: React.FC<{ pet: Pet; onEdit: () => void; onDelete: () => void }> = ({
-  pet,
-  onEdit,
-  onDelete,
-}) => {
+export const PetCard: React.FC<{ pet: Pet; onDelete: () => void }> = ({pet, onDelete}) => {
+  const navigate = useNavigate();
+   
   return (
     <article
       className={[
@@ -78,7 +77,7 @@ export const PetCard: React.FC<{ pet: Pet; onEdit: () => void; onDelete: () => v
         </p>
 
         <button
-          onClick={onEdit}
+          onClick={() => navigate(`/pets/${pet.id}`)}
           type="button"
           className={[
             "w-full py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em]",

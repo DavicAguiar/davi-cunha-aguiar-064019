@@ -86,10 +86,8 @@ export const Pagination: React.FC<PaginationProps> = ({ pagination, onChangePage
         <ChevronLeft size={20} />
       </button>
 
-      <div
-        className="flex items-center gap-1 p-1.5 rounded-[2rem] border
-                   bg-[color:var(--nav-bg)] border-[color:var(--nav-border)]"
-      >
+      <div className="flex items-center gap-1 p-1.5 rounded-[2rem] border
+        bg-[color:var(--nav-bg)] border-[color:var(--nav-border)]">
         {showLeftEllipsis && (
           <>
             <PageButton page={firstPage} />

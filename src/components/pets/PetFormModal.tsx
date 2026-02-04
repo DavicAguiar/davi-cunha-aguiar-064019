@@ -34,6 +34,7 @@ export const PetFormModal: React.FC<PetFormModalProps> = ({ isOpen, onClose, pet
       setForm({ nome: "", raca: "", idade: "" });
       setPreviewUrl("");
     }
+
     setSelectedFile(null);
     setErrors({});
   }, [isOpen, petToEdit]);
@@ -104,16 +105,14 @@ export const PetFormModal: React.FC<PetFormModalProps> = ({ isOpen, onClose, pet
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-[100] p-6 bg-[color:var(--modal-overlay-strong)] backdrop-blur-md">
-      <div
-        className="w-full max-w-6xl rounded-[3.5rem] overflow-hidden flex flex-col md:flex-row
-          border border-[color:var(--modal-border)]
-          bg-[color:var(--modal-bg)]
-          animate-in fade-in zoom-in duration-300"
+      <div className="w-full max-w-6xl rounded-[3.5rem] overflow-hidden flex flex-col md:flex-row
+        border border-[color:var(--modal-border)]
+        bg-[color:var(--modal-bg)]
+        animate-in fade-in zoom-in duration-300"
       >
-        <div
-          className="md:w-5/12 p-12 flex flex-col items-center border-r
-            border-[color:var(--modal-border)]
-            bg-[image:var(--modal-header-bg)]"
+        <div className="md:w-5/12 p-12 flex flex-col items-center border-r
+          border-[color:var(--modal-border)]
+          bg-[image:var(--modal-header-bg)]"
         >
           <div
             onClick={() => fileInputRef.current?.click()}
@@ -125,8 +124,7 @@ export const PetFormModal: React.FC<PetFormModalProps> = ({ isOpen, onClose, pet
             ].join(" ")}
           >
             {previewUrl ? (
-              <img
-                src={previewUrl}
+              <img src={previewUrl}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                 alt="Preview"
               />

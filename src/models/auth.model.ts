@@ -1,9 +1,9 @@
 export interface User {
   username: string;
-  perfil: 'ADMIN' | 'USUARIO';
+  perfil: 'ADMIN';
 }
 
-export type AuthView = 'LOGIN' | 'MFA';
+export type AuthView = 'ADMIN';
 
 export interface AuthTokens {
   access_token: string;

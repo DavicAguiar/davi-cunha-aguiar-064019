@@ -107,6 +107,7 @@ export const TutorPetLinker: React.FC<Props> = ({ tutorId, onViewPet }) => {
       <div className="flex items-end justify-between gap-3">
         <div>
           <h4 className="text-xl font-black tracking-tight text-[color:var(--modal-text)]">Vínculos Pet-Tutor</h4>
+
           <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[color:var(--modal-muted-2)] mt-1">
             Vincule ou remova pets deste tutor
           </p>
@@ -124,8 +125,7 @@ export const TutorPetLinker: React.FC<Props> = ({ tutorId, onViewPet }) => {
         </button>
       </div>
 
-      <div
-        ref={availBoxRef}
+      <div ref={availBoxRef}
         className="relative rounded-3xl border border-[color:var(--modal-border)] bg-[color:var(--modal-bg)] p-5"
         style={availMinHeight ? { minHeight: availMinHeight } : undefined}
       >
@@ -301,9 +301,8 @@ export const TutorPetLinker: React.FC<Props> = ({ tutorId, onViewPet }) => {
 };
 
 const Row: React.FC<{ pet: Pet; onView: () => void; children: React.ReactNode }> = ({ pet, onView, children }) => (
-  <div
-    className="flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 overflow-hidden
-      border-[color:var(--modal-border)] bg-[color:var(--modal-bg)]"
+  <div className="flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 overflow-hidden
+    border-[color:var(--modal-border)] bg-[color:var(--modal-bg)]"
   >
     <button type="button" onClick={onView} className="flex-1 min-w-0 text-left hover:opacity-90">
       <p className="font-black truncate text-[color:var(--modal-text)]">{pet.nome}</p>

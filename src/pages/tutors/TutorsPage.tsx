@@ -95,10 +95,10 @@ export const TutorsPage: React.FC = () => {
           type="button"
           onClick={() => setIsFormOpen(true)}
           className="px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest
-                     bg-[color:var(--primary)] text-white
-                     hover:bg-[color:var(--primary-hover)]
-                     focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--primary)]
-                     active:scale-95 transition flex items-center gap-2 cursor-pointer"
+            bg-[color:var(--primary)] text-white
+            hover:bg-[color:var(--primary-hover)]
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--primary)]
+            active:scale-95 transition flex items-center gap-2 cursor-pointer"
         >
           <Plus size={18} strokeWidth={3} />
           Novo Registro
@@ -110,8 +110,7 @@ export const TutorsPage: React.FC = () => {
       <div ref={contentBoxRef} className="relative" style={minHeight ? { minHeight } : undefined}>
         {loading ? (
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center py-40 gap-4 rounded-[3rem] backdrop-blur-[2px]">
-            <div
-              className="w-12 h-12 border-4 rounded-full animate-spin"
+            <div className="w-12 h-12 border-4 rounded-full animate-spin"
               style={{
                 borderColor: "color-mix(in srgb, var(--nav-border) 55%, transparent)",
                 borderTopColor: "var(--primary)",
@@ -137,9 +136,8 @@ export const TutorsPage: React.FC = () => {
               ))}
             </div>
           ) : (
-            <div
-              className="py-40 text-center border-2 border-dashed rounded-[3rem]
-                         border-[color:var(--nav-border)] bg-[color:var(--nav-bg)]"
+            <div className="py-40 text-center border-2 border-dashed rounded-[3rem]
+              border-[color:var(--nav-border)] bg-[color:var(--nav-bg)]"
             >
               <p className="font-bold uppercase text-xs tracking-widest text-[color:var(--nav-muted-2)]">
                 Nenhum tutor encontrado com esses filtros

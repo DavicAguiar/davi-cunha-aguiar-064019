@@ -11,6 +11,7 @@ export const InputField: React.FC<InputFieldProps> = ({ label, error, className 
       <label htmlFor={props.id} className="block text-sm font-medium text-slate-700">
         {label}
       </label>
+      
       <input
         {...props}
         className={`

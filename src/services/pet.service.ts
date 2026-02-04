@@ -17,6 +17,11 @@ export const petService = {
     return response.data;
   },
 
+  async getPetById(id: number) {
+    const response = await api.get(`/pets/${id}`);
+    return response.data;
+  },
+
   async createPet(pet: Omit<Pet, 'id' | 'foto'>): Promise<Pet> {
     const response = await api.post('/pets', pet);
     return response.data;

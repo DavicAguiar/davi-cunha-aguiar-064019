@@ -20,8 +20,7 @@ export const SupportContent: React.FC = () => {
       </Motion>
 
       <Motion delay={40}>
-        <div
-          className={[
+        <div className={[
             "rounded-2xl border p-4",
             "border-[color:var(--nav-border)]",
             "bg-[color:var(--nav-bg)]",

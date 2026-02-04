@@ -1,4 +1,4 @@
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { map, distinctUntilChanged, debounceTime, switchMap } from 'rxjs/operators';
 import { petState$, petStateActions } from '../state/pet.state';
 import { petService } from '../services/pet.service';

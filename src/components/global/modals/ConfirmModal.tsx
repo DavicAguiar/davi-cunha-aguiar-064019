@@ -89,8 +89,7 @@ export const ConfirmModal: React.FC<Props> = ({
         style={{ transitionDuration: `${ANIMATION_MS}ms` }}
       />
 
-      <div
-        className={[
+      <div className={[
           "relative w-full max-w-lg rounded-[2rem] overflow-hidden",
           "border shadow-2xl transition-all",
           "bg-[color:var(--modal-bg)] border-[color:var(--modal-border)] text-[color:var(--modal-text)]",
@@ -112,6 +111,7 @@ export const ConfirmModal: React.FC<Props> = ({
           <h3 id={titleId} className="text-xl font-black tracking-tight text-[color:var(--modal-text)]">
             {title}
           </h3>
+
           <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[color:var(--modal-muted-2)] mt-1">
             Confirmação
           </p>

@@ -12,16 +12,14 @@ export const PetInfoModal: React.FC<Props> = ({ isOpen, pet, onClose }) => {
   if (!isOpen || !pet) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-[120] backdrop-blur-sm flex items-center justify-center p-4
-        bg-[color:var(--modal-overlay)]"
+    <div className="fixed inset-0 z-[120] backdrop-blur-sm flex items-center justify-center p-4
+      bg-[color:var(--modal-overlay)]"
       role="dialog"
       aria-modal="true"
     >
-      <div
-        className="w-full max-w-xl rounded-[2rem] overflow-hidden border shadow-2xl
-          bg-[color:var(--modal-bg)] border-[color:var(--modal-border)]
-          text-[color:var(--modal-text)]"
+      <div className="w-full max-w-xl rounded-[2rem] overflow-hidden border shadow-2xl
+        bg-[color:var(--modal-bg)] border-[color:var(--modal-border)]
+        text-[color:var(--modal-text)]"
       >
         <div className="relative px-6 py-5 border-b border-[color:var(--modal-border)] bg-[image:var(--modal-header-bg)]">
           <button
@@ -85,10 +83,9 @@ export const PetInfoModal: React.FC<Props> = ({ isOpen, pet, onClose }) => {
 };
 
 const InfoRow: React.FC<{ label: string; value: string }> = ({ label, value }) => (
-  <div
-    className="rounded-2xl border px-4 py-3
-      border-[color:var(--modal-border)]
-      bg-[color:var(--modal-bg)]"
+  <div className="rounded-2xl border px-4 py-3
+    border-[color:var(--modal-border)]
+    bg-[color:var(--modal-bg)]"
   >
     <div className="text-[10px] font-black uppercase tracking-widest text-[color:var(--modal-muted-2)]">
       {label}

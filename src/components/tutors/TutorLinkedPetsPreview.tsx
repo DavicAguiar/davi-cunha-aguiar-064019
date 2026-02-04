@@ -6,11 +6,12 @@ import { ConfirmModal } from "../global/modals/ConfirmModal";
 
 type Props = {
   tutorId?: number;
-  onManageClick: () => void;
+  onManageClick?: () => void;
   onViewPet: (pet: Pet) => void;
+  showManage?: boolean; 
 };
 
-export const TutorLinkedPetsPreview: React.FC<Props> = ({ tutorId, onManageClick, onViewPet }) => {
+export const TutorLinkedPetsPreview: React.FC<Props> = ({ tutorId, onManageClick, onViewPet, showManage = true, }) => {
   const [pets, setPets] = useState<Pet[]>([]);
   const [loading, setLoading] = useState(false);
   const [confirmPet, setConfirmPet] = useState<Pet | null>(null);
@@ -63,26 +64,26 @@ export const TutorLinkedPetsPreview: React.FC<Props> = ({ tutorId, onManageClick
           </p>
         </div>
 
-        <button
-          type="button"
-          onClick={onManageClick}
-          disabled={!tutorId}
-          className="px-4 py-2 rounded-xl border text-[10px] font-black uppercase tracking-widest transition
-            bg-[color:var(--nav-bg)] border-[color:var(--nav-border)]
-            text-[color:var(--nav-muted)]
-            hover:bg-[color:var(--modal-ghost-hover-bg)] hover:text-[color:var(--nav-text)]
-            disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-          title={!tutorId ? "Salve o tutor primeiro para gerenciar vínculos" : undefined}
-        >
-          Gerenciar
-        </button>
+        {showManage ? (
+          <button
+            type="button"
+            onClick={onManageClick}
+            disabled={!tutorId || !onManageClick}
+            className="px-4 py-2 rounded-xl border text-[10px] font-black uppercase tracking-widest transition
+              bg-[color:var(--nav-bg)] border-[color:var(--nav-border)]
+              text-[color:var(--nav-muted)]
+              hover:bg-[color:var(--modal-ghost-hover-bg)] hover:text-[color:var(--nav-text)]
+              disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            title={!tutorId ? "Salve o tutor primeiro para gerenciar vínculos" : undefined}
+          >
+            Gerenciar
+          </button>
+        ) : null}
       </div>
 
       <div className="mt-4 space-y-2">
         {pets.slice(0, 3).map((p) => (
-          <div
-            key={p.id}
-            className="flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 overflow-hidden
+          <div key={p.id} className="flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 overflow-hidden
               border-[color:var(--nav-border)] bg-[color:var(--nav-bg)]"
           >
             <div className="min-w-0">
@@ -121,7 +122,7 @@ export const TutorLinkedPetsPreview: React.FC<Props> = ({ tutorId, onManageClick
           </div>
         ))}
 
-        {pets.length > 3 ? (
+        {showManage && pets.length > 3 ? (
           <div className="text-[10px] font-bold uppercase tracking-widest text-[color:var(--nav-muted-2)] pt-2">
             + {pets.length - 3} outro(s). Clique em <span className="text-emerald-600">Gerenciar</span>.
           </div>

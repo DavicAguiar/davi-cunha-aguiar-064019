@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import type { AuthState, AuthView, User } from '../models/auth.model';
+import type { AuthState, AuthView } from '../models/auth.model';
 
 const savedView = localStorage.getItem('mfa_pending') === 'true' ? 'MFA' : 'LOGIN';
 
@@ -44,7 +44,7 @@ export const authStateActions = {
       isAuthenticated: true,
       loading: false,
       error: null,
-      currentView: 'LOGIN'
+      currentView: 'ADMIN'
     });
   },
 
@@ -55,7 +55,7 @@ export const authStateActions = {
       user: null, 
       token: null, 
       isAuthenticated: false, 
-      currentView: 'LOGIN', 
+      currentView: 'ADMIN', 
       loading: false, 
       error: null 
     });

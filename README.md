@@ -1,4 +1,4 @@
-# Processo Seletivo SEPLAG/MT - Edital nº 001/2026
+# Processo Seletivo SEPLAG/MT — Edital nº 001/2026
 
 **Cargo:** Analista de TI — Perfil Engenheiro da Computação (Sênior)  
 **Candidato:** Davi da Cunha Aguiar  
@@ -8,9 +8,9 @@
 
 ## Objetivo do projeto
 
-Aplicação Front-end em React + TypeScript para consumo da API pública de pets/tutores:
+Aplicação **Front-end** em **React + TypeScript** para consumo da API pública de **Pets** e **Tutores**, conforme o edital.
 
-- Swagger: <https://pet-manager-api.geia.vip/q/swagger-ui/>
+- Swagger: https://pet-manager-api.geia.vip/q/swagger-ui/
 - API base usada no projeto:
   - `https://pet-manager-api.geia.vip/v1` (módulos de pets/tutores)
   - `https://pet-manager-api.geia.vip` (autenticação)
@@ -21,24 +21,24 @@ Aplicação Front-end em React + TypeScript para consumo da API pública de pets
 
 ### Stack principal
 
-- React 19 + Vite + TypeScript
-- React Router com carregamento lazy de páginas
+- React + Vite + TypeScript (**obrigatório**)
+- React Router com **lazy loading** (carregamento sob demanda de páginas)
 - Axios para chamadas HTTP
-- RxJS (`BehaviorSubject`) para gerenciamento de estado global
+- RxJS (`BehaviorSubject`) para gerenciamento de estado global (conforme nível Sênior)
 - Tailwind CSS para layout responsivo
 
-### Organização em camadas (com Facade)
+### Organização em camadas (Padrão Facade)
 
-- `src/pages` e `src/components`: camada de UI
-- `src/facades`: orquestração de regras e fluxo entre UI e dados
-- `src/services`: integração com API HTTP
-- `src/state`: estado global reativo com `BehaviorSubject`
+Organizei o projeto em camadas para reduzir acoplamento e manter responsabilidades claras:
+
+- `src/pages` e `src/components`: **UI** (apresentação)
+- `src/facades`: **orquestração** do fluxo entre UI ↔ serviços ↔ estado
+- `src/services`: **integração HTTP** com a API
+- `src/state`: **estado global reativo** com `BehaviorSubject`
 
 ---
 
 ## Mapeamento dos requisitos do edital (status atual)
-
-> **Importante:** este quadro foi revisado com base no código atual do repositório.
 
 ### Requisitos gerais
 
@@ -48,13 +48,13 @@ Aplicação Front-end em React + TypeScript para consumo da API pública de pets
 - ✅ Lazy loading das rotas principais (`Login`, `Pets`, `Tutores`, etc.)
 - ✅ Paginação (10 itens por página)
 - ✅ TypeScript
-- ✅ Organização/componentização
-- ⚠️ **Testes unitários básicos não encontrados no repositório**
+- ✅ Organização e componentização
+- ⚠️ **Testes unitários básicos não foram feitos** (pendente)
 
 ### 1) Tela inicial — listagem de pets
 
 - ✅ GET `/v1/pets`
-- ✅ Exibição em cards (foto, nome, espécie/raça, idade)
+- ✅ Exibição em cards (foto, nome, raça, idade)
 - ✅ Paginação
 - ✅ Busca por nome
 
@@ -71,7 +71,7 @@ Aplicação Front-end em React + TypeScript para consumo da API pública de pets
 - ✅ PUT `/v1/pets/{id}`
 - ✅ Campos principais de cadastro/edição
 - ✅ Upload de foto via POST `/v1/pets/{id}/fotos`
-- ✅ Máscara/normalização para campos numéricos (ex.: idade)
+- ✅ Máscara/normalização para campos numéricos
 
 ### 4) Cadastro/Edição de tutor
 
@@ -141,20 +141,35 @@ Aplicação disponível em `http://localhost`.
 
 ## Pendências e priorização
 
-Para aderência total ao edital (especialmente perfil Sênior), os próximos passos prioritários são:
+Os próximos passos prioritários são:
 
 1. Implementar suíte mínima de testes unitários (ex.: facades/services/componentes críticos).
-2. Ajustar pipeline para build/lint sem erros.
+2. Ajustar pipeline para lint sem erros.
 3. Incluir health checks no container/runtime (liveness/readiness).
-4. Documentar estratégia de deploy (ambiente, variáveis e versionamento da imagem).
+4. Documentar estratégia de deploy.
+
+---
+
+## Transparência sobre uso de IA
+
+Utilizei ferramentas de IA como apoio para **verificação de erros**, **melhorias** e **revisão pontual** de trechos do projeto, incluindo:
+
+- **ChatGPT Plus**
+- **Gemini Pro**
+- **Claude**
+
+**Como garanti autoria e qualidade:**
+- toda sugestão foi **avaliada e validada por mim**, com foco em tipagem, fluxo, consistência com a API e aderência ao edital;
+- apliquei refatorações para manter responsabilidades claras (**UI vs Facade vs Services vs State**);
+- o objetivo do uso de IA foi **aumentar produtividade e qualidade**, sem substituir autoria técnica.
 
 ---
 
 ## Observações finais para banca
 
-Este README foi estruturado para facilitar avaliação de:
+Procurei entregar um código legível, bem tipado e fácil de evoluir, priorizando aderência ao edital e organização em camadas.
+O fluxo: autenticação, consumo de API, CRUD, paginação/filtros e performance com lazy loading.
 
-- cobertura de requisitos;
-- arquitetura adotada;
-- forma de execução;
-- transparência sobre o que já está pronto e o que ainda precisa ser concluído.
+Sou uma pessoa dedicada, posso não saber tudo, mas tenho a plena convicção de que sei **achar a resposta, aprender rápido e chegar na melhor solução**, validando com critério técnico.
+
+Fico à disposição para explicar decisões e trade-offs adotados (Facade, BehaviorSubject/RxJS, interceptors de autenticação e organização por camadas) e discutir possíveis melhorias.

@@ -1,67 +1,160 @@
 # Processo Seletivo SEPLAG/MT - Edital nº 001/2026
 
-**Cargo:** Analista de TI - Perfil Engenheiro da Computação (Sênior)  
+**Cargo:** Analista de TI — Perfil Engenheiro da Computação (Sênior)  
 **Candidato:** Davi da Cunha Aguiar  
-**Repositório:** davi-cunha-aguiar-064019  
+**Repositório:** `davi-cunha-aguiar-064019`
 
 ---
 
-## 🏗️ Arquitetura e Decisões Técnicas
+## Objetivo do projeto
 
-Este projeto é uma SPA (Single Page Application) em **React**, com foco em organização, manutenibilidade e boas práticas de engenharia para um contexto de avaliação de nível Sênior.
+Aplicação Front-end em React + TypeScript para consumo da API pública de pets/tutores:
 
-### 1) Padrão Facade (Arquitetura em Camadas)
-
-A aplicação utiliza o **Padrão Facade** para reduzir acoplamento e gerenciar a complexidade das interações entre a UI e as camadas de dados.
-
-- **UI Layer:** Componentes React focados na renderização e interação do usuário.
-- **Facade Layer:** Ponto único de acesso que coordena chamadas aos serviços de API e atualização do estado global.
-- **Service Layer:** Responsável pelas requisições HTTP (ex.: Axios) para os endpoints de **Pets** e **Tutores**.
-
-### 2) Gestão de Estado com RxJS (BehaviorSubject)
-
-O estado global da aplicação (ex.: lista de pets e autenticação) é gerenciado via **BehaviorSubject** do RxJS.
-
-- Permite reatividade com múltiplos componentes assinando mudanças de estado.
-- Ajuda a manter lógica assíncrona mais complexa fora do ciclo de vida dos componentes.
-
-### 3) Containerização e Infraestrutura
-
-A aplicação foi empacotada utilizando **Multi-stage Docker build**:
-
-- **Build Stage:** Node.js 20 para compilar o TypeScript e gerar o bundle de produção.
-- **Production Stage:** Nginx para servir os arquivos estáticos com baixo consumo de recursos.
-- **Observabilidade:** Health checks (Liveness/Readiness) para monitoramento do container.
-
-### 4) Performance e UX
-
-- **Lazy Loading:** Rotas/módulos de "Pets" e "Tutores" carregados sob demanda para reduzir o tempo de carregamento inicial.
-- **Tailwind CSS:** Layout responsivo e manutenção facilitada.
-- **TypeScript:** Tipagem estrita para melhorar manutenibilidade e reduzir erros em runtime.
+- Swagger: <https://pet-manager-api.geia.vip/q/swagger-ui/>
+- API base usada no projeto:
+  - `https://pet-manager-api.geia.vip/v1` (módulos de pets/tutores)
+  - `https://pet-manager-api.geia.vip` (autenticação)
 
 ---
 
-## 🚀 Como Executar o Projeto
+## Arquitetura e decisões técnicas
+
+### Stack principal
+
+- React 19 + Vite + TypeScript
+- React Router com carregamento lazy de páginas
+- Axios para chamadas HTTP
+- RxJS (`BehaviorSubject`) para gerenciamento de estado global
+- Tailwind CSS para layout responsivo
+
+### Organização em camadas (com Facade)
+
+- `src/pages` e `src/components`: camada de UI
+- `src/facades`: orquestração de regras e fluxo entre UI e dados
+- `src/services`: integração com API HTTP
+- `src/state`: estado global reativo com `BehaviorSubject`
+
+---
+
+## Mapeamento dos requisitos do edital (status atual)
+
+> **Importante:** este quadro foi revisado com base no código atual do repositório.
+
+### Requisitos gerais
+
+- ✅ Requisições em tempo real via Axios
+- ✅ Layout responsivo
+- ✅ Uso de Tailwind CSS
+- ✅ Lazy loading das rotas principais (`Login`, `Pets`, `Tutores`, etc.)
+- ✅ Paginação (10 itens por página)
+- ✅ TypeScript
+- ✅ Organização/componentização
+- ⚠️ **Testes unitários básicos não encontrados no repositório**
+
+### 1) Tela inicial — listagem de pets
+
+- ✅ GET `/v1/pets`
+- ✅ Exibição em cards (foto, nome, espécie/raça, idade)
+- ✅ Paginação
+- ✅ Busca por nome
+
+### 2) Tela de detalhamento do pet
+
+- ✅ Navegação por clique no card para detalhamento
+- ✅ GET `/v1/pets/{id}`
+- ✅ Exibição de tutor vinculado (quando disponível no payload de pet)
+- ✅ Destaque visual para o nome do pet
+
+### 3) Cadastro/Edição de pet
+
+- ✅ POST `/v1/pets`
+- ✅ PUT `/v1/pets/{id}`
+- ✅ Campos principais de cadastro/edição
+- ✅ Upload de foto via POST `/v1/pets/{id}/fotos`
+- ✅ Máscara/normalização para campos numéricos (ex.: idade)
+
+### 4) Cadastro/Edição de tutor
+
+- ✅ POST `/v1/tutores`
+- ✅ PUT `/v1/tutores/{id}`
+- ✅ Upload de foto via POST `/v1/tutores/{id}/fotos`
+- ✅ Vincular pet: POST `/v1/tutores/{id}/pets/{petId}`
+- ✅ Remover vínculo: DELETE `/v1/tutores/{id}/pets/{petId}`
+- ✅ Listagem de pets vinculados na tela de tutor
+
+### 5) Autenticação
+
+- ✅ Login via POST `/autenticacao/login`
+- ✅ Refresh de token via PUT `/autenticacao/refresh`
+- ✅ Interceptor para renovação automática em respostas 401
+
+### Requisitos apenas para Sênior
+
+- ⚠️ **Health checks/Liveness/Readiness não estão implementados no container atual**
+- ⚠️ **Testes unitários não foram encontrados**
+- ✅ Uso de Facade e gerenciamento de estado com `BehaviorSubject`
+
+---
+
+## Como executar
 
 ### Pré-requisitos
-- Docker instalado
 
-## 🐳 Docker (Multi-stage) e Deploy
+- Node.js 20+
+- npm 10+
 
-A aplicação é empacotada com **Docker multi-stage**:
+### Execução local
 
-- **Build Stage:** `node:20-alpine` instala dependências e executa `npm run build`.
-- **Runtime Stage:** `nginx:stable-alpine` serve os arquivos estáticos gerados em `/app/dist`.
+```bash
+npm install
+npm run dev
+```
 
-O build final é copiado para:
-- `/usr/share/nginx/html` 
+Aplicação disponível em `http://localhost:5173`.
 
-### Iniciar sem build
+### Build de produção
 
-- **Build Stage:** executar o comando `npm run dev`.
+```bash
+npm run build
+npm run preview
+```
 
-### Executar via Docker
+### Execução com Docker
 
 ```bash
 docker build -t projeto-seplag .
-docker run -p 80:80 projeto-seplag
+docker run --rm -p 80:80 projeto-seplag
+```
+
+Aplicação disponível em `http://localhost`.
+
+---
+
+## Scripts disponíveis
+
+- `npm run dev`: servidor de desenvolvimento
+- `npm run build`: build TypeScript + Vite
+- `npm run lint`: análise estática ESLint
+- `npm run preview`: servidor local para artefato de produção
+
+---
+
+## Pendências e priorização
+
+Para aderência total ao edital (especialmente perfil Sênior), os próximos passos prioritários são:
+
+1. Implementar suíte mínima de testes unitários (ex.: facades/services/componentes críticos).
+2. Ajustar pipeline para build/lint sem erros.
+3. Incluir health checks no container/runtime (liveness/readiness).
+4. Documentar estratégia de deploy (ambiente, variáveis e versionamento da imagem).
+
+---
+
+## Observações finais para banca
+
+Este README foi estruturado para facilitar avaliação de:
+
+- cobertura de requisitos;
+- arquitetura adotada;
+- forma de execução;
+- transparência sobre o que já está pronto e o que ainda precisa ser concluído.
